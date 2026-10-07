@@ -1,82 +1,56 @@
 /* ==========================================================================
    Thunderbird Better Unread - userChrome.css
    Enhances visual contrast between read and unread emails in Cards View & Table View.
-   Compatible with Thunderbird 115+ (Supernova) and later versions.
+   Tested and verified on Thunderbird 115+ (Supernova) and later versions.
    GitHub: https://github.com/santiago0071/thunderbird-better-unread
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Light Mode Styles
+   1. Light Mode (Default)
    -------------------------------------------------------------------------- */
-@media (prefers-color-scheme: light) {
-  /* Read emails: De-emphasized, subtle muted gray, normal font weight, lowered opacity */
-  #threadTree tbody tr:not([data-properties~="unread"]):not([selected]),
-  #threadTree li:not([data-properties~="unread"]):not([selected]) {
-    color: #737373 !important;
-    font-weight: normal !important;
-    opacity: 0.68 !important;
-  }
+/* 1.1 先把所有已读邮件：全部变成浅灰普通细字、半透明 */
+#threadTree tbody tr:not([data-properties~="unread"]),
+#threadTree li:not([data-properties~="unread"]) {
+  color: #888888 !important;
+  font-weight: normal !important;
+  opacity: 0.65 !important;
+}
 
-  /* Unread emails: Prominent, high contrast black, heavy font weight */
-  #threadTree tbody tr[data-properties~="unread"] *,
-  #threadTree li[data-properties~="unread"] * {
-    color: #0f172a !important;
-    font-weight: 800 !important;
-    opacity: 1 !important;
-  }
-
-  /* Subject & sender specific tweaks in Cards View for read emails */
-  #threadTree li:not([data-properties~="unread"]):not([selected]) .subject,
-  #threadTree li:not([data-properties~="unread"]):not([selected]) .sender {
-    font-weight: 400 !important;
-    color: #64748b !important;
-  }
-
-  /* Subject & sender specific tweaks in Cards View for unread emails */
-  #threadTree li[data-properties~="unread"] .subject,
-  #threadTree li[data-properties~="unread"] .sender {
-    font-weight: 800 !important;
-    color: #020617 !important;
-  }
+/* 1.2 专门指定未读邮件：纯黑、加粗、完全不透明 */
+#threadTree tbody tr[data-properties~="unread"],
+#threadTree li[data-properties~="unread"],
+#threadTree tbody tr[data-properties~="unread"] *,
+#threadTree li[data-properties~="unread"] * {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
 }
 
 /* --------------------------------------------------------------------------
-   Dark Mode Styles
+   2. Dark Mode Support (深色模式适配)
    -------------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
-  /* Read emails: Subtle muted slate, normal font weight, lowered opacity */
-  #threadTree tbody tr:not([data-properties~="unread"]):not([selected]),
-  #threadTree li:not([data-properties~="unread"]):not([selected]) {
-    color: #94a3b8 !important;
+  /* 已读邮件：柔和灰字、降低透明度 */
+  #threadTree tbody tr:not([data-properties~="unread"]),
+  #threadTree li:not([data-properties~="unread"]) {
+    color: #999999 !important;
     font-weight: normal !important;
     opacity: 0.55 !important;
   }
 
-  /* Unread emails: Crisp high contrast white, heavy font weight */
+  /* 未读邮件：高亮纯白、加粗、完全不透明 */
+  #threadTree tbody tr[data-properties~="unread"],
+  #threadTree li[data-properties~="unread"],
   #threadTree tbody tr[data-properties~="unread"] *,
   #threadTree li[data-properties~="unread"] * {
-    color: #f8fafc !important;
+    color: #ffffff !important;
     font-weight: 800 !important;
     opacity: 1 !important;
-  }
-
-  /* Subject & sender specific tweaks in Cards View for read emails */
-  #threadTree li:not([data-properties~="unread"]):not([selected]) .subject,
-  #threadTree li:not([data-properties~="unread"]):not([selected]) .sender {
-    font-weight: 400 !important;
-    color: #94a3b8 !important;
-  }
-
-  /* Subject & sender specific tweaks in Cards View for unread emails */
-  #threadTree li[data-properties~="unread"] .subject,
-  #threadTree li[data-properties~="unread"] .sender {
-    font-weight: 800 !important;
-    color: #ffffff !important;
   }
 }
 
 /* --------------------------------------------------------------------------
-   Keep selected items clearly readable
+   3. Selected Item Preservation (保持选中邮件高清晰度)
    -------------------------------------------------------------------------- */
 #threadTree tbody tr[selected],
 #threadTree li[selected] {
