@@ -1,11 +1,11 @@
-# 🦅 Thunderbird Better Unread (Readable Cards)
+# 🦅 Thunderbird Better Unread
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Thunderbird: 115+ (Supernova)](https://img.shields.io/badge/Thunderbird-115%2B%20(Supernova)-orange.svg)](https://www.thunderbird.net/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)]()
 
-> **Fix unread email visibility in Mozilla Thunderbird Cards View.**  
-> 拯救 Mozilla Thunderbird（Supernova 及更新版本）卡片视图中“已读未读傻傻分不清”的糟糕默认体验。
+> **A lightweight CSS enhancement that improves visual contrast and hierarchy between read and unread messages in Mozilla Thunderbird Cards View.**  
+> 优化 Mozilla Thunderbird（Supernova 及更高版本）卡片视图中已读与未读邮件的视觉对比度与信息层级。
 
 ---
 
@@ -13,28 +13,28 @@
 
 ---
 
-## 📸 Preview / 效果对比
+## 📸 Preview / 视觉对比
 
 ![Thunderbird Better Unread Preview](assets/preview.png)
 
-| 状态 | 默认体验 (Default) | 打上补丁后 (With Better Unread) |
+| 邮件状态 (State) | 默认样式 (Thunderbird Default) | 增强样式 (With Better Unread) |
 | :--- | :--- | :--- |
-| **已读邮件 (Read)** | 同样粗黑，充斥整个视野 | 优雅降噪，半透明浅灰，去加粗 (`opacity: 0.68`) |
-| **未读邮件 (Unread)** | 对比度不足，不易察觉 | 纯黑/高亮纯白，超粗体突出 (`font-weight: 800`) |
+| **已读邮件 (Read)** | 维持深色与常规字重，在密集列表中视觉权重大 | 采用柔和灰阶与细体，适度降低不透明度 (`opacity: 0.65`)，弱化视觉干扰 |
+| **未读邮件 (Unread)** | 与已读邮件的字重和对比度差异较小 | 强化为纯黑/纯白高对比度超粗体 (`font-weight: 800`)，快速聚焦未读信息 |
 
 ---
 
 <a name="english-overview"></a>
 ## 🇬🇧 English Overview
 
-### 💡 Why this exists
-Since the release of **Mozilla Thunderbird 115 (Supernova)**, the default **Cards View** displays both unread and read emails with identical heavy fonts, dark colors, and visual weights. When scanning through dozens of emails, it's exhausting to tell which ones still need attention.
+### 💡 Design Context
+In **Mozilla Thunderbird 115+ (Supernova)**, the newly introduced **Cards View** uses similar typography colors and font weights for both unread and read messages in the message list. In high-volume inboxes, quickly distinguishing unprocessed emails can require extra scanning effort.
 
-**Thunderbird Better Unread** provides an ultra-lightweight, zero-overhead CSS theme patch via `userChrome.css` that instantly restores intuitive visual hierarchy:
-- **Unread emails**: Highlighted with heavy bold weight and crisp high contrast.
-- **Read emails**: Subtly dimmed with soft gray tones and gentle opacity.
-- **Dark Mode & Light Mode**: Seamlessly adapts to your OS theme.
-- **Table View Compatible**: Also optimizes the classic table view.
+**Thunderbird Better Unread** provides a lightweight, zero-dependency stylesheet patch via `userChrome.css` to restore an intuitive visual hierarchy:
+- **Unread Messages**: Rendered with high-contrast text and prominent font weight (`font-weight: 800`).
+- **Read Messages**: Softened with neutral gray tones and gentle opacity (`opacity: 0.65`) to reduce visual clutter.
+- **Theme Adaptive**: Fully supports both Light Mode and Dark Mode via standard `@media (prefers-color-scheme)`.
+- **View Compatibility**: Applies seamlessly to both Cards View (`li`) and classic Table View (`tr`).
 
 ---
 
@@ -42,7 +42,7 @@ Since the release of **Mozilla Thunderbird 115 (Supernova)**, the default **Card
 
 #### Windows
 1. Download or clone this repository.
-2. Double-click **`scripts/install.bat`**.
+2. Run **`scripts/install.bat`**.
 3. Restart Thunderbird.
 
 #### macOS / Linux
@@ -51,7 +51,7 @@ Since the release of **Mozilla Thunderbird 115 (Supernova)**, the default **Card
    git clone https://github.com/santiago0071/thunderbird-better-unread.git
    cd thunderbird-better-unread
    ```
-2. Run the install script:
+2. Execute the install script:
    ```bash
    chmod +x scripts/install.sh
    ./scripts/install.sh
@@ -62,19 +62,19 @@ Since the release of **Mozilla Thunderbird 115 (Supernova)**, the default **Card
 
 ### 🛠️ Manual Installation
 
-If you prefer not to use scripts:
+If you prefer configuring files manually:
 
-1. In Thunderbird, open **Settings** (`≡` menu -> **Settings**) -> **General**.
-2. Scroll to the bottom and click **Config Editor...** (or search for `about:config`).
-3. Search for:
+1. In Thunderbird, navigate to **Settings** (`≡` menu -> **Settings**) -> **General**.
+2. Scroll to the bottom and click **Config Editor...** (about:config).
+3. Search for preference:
    ```text
    toolkit.legacyUserProfileCustomizations.stylesheets
    ```
-   Toggle it to **`true`**.
+   Set it to **`true`**.
 4. Go to **Help** -> **Troubleshooting Information**.
-5. Under the **Application Basics** section, find **Profile Folder** (or Profile Directory) and click **Open Folder** / **Show in Finder**.
-6. Inside your profile folder, create a new folder named `chrome` (all lowercase) if it doesn't already exist.
-7. Copy [`chrome/userChrome.css`](chrome/userChrome.css) from this repo into that `chrome` folder.
+5. Under **Application Basics**, locate **Profile Folder** (or Profile Directory) and click **Open Folder** / **Show in Finder**.
+6. Inside the profile directory, create a folder named `chrome` (in lowercase) if it does not already exist.
+7. Copy [`chrome/userChrome.css`](chrome/userChrome.css) into the `chrome` directory.
 8. Restart Thunderbird.
 
 ---
@@ -82,78 +82,78 @@ If you prefer not to use scripts:
 <a name="中文介绍"></a>
 ## 🇨🇳 中文介绍
 
-### 💡 痛点背景
-Mozilla Thunderbird 升级至 115（Supernova 架构）并采用全新的**卡片视图（Cards View）**后，许多用户面临一个共同的视觉折磨：**已读和未读邮件的发件人、主题文字粗细与颜色几乎无差，满屏都是大粗体，扫一眼极难快速定位未读邮件**。
+### 💡 设计背景
+在 **Mozilla Thunderbird 115（Supernova 架构）**及后续版本中，卡片视图（Cards View）对已读邮件与未读邮件采用了接近的字体颜色和字重定义。当收件箱邮件较多时，用户需要花费额外精力来定位未处理的邮件。
 
-本项目通过极简纯净的 `userChrome.css` 样式规则，重塑直观的层级分界：
-- **未读邮件**：加粗高对比度（800 字重），一眼直达；
-- **已读邮件**：柔和灰阶 + 适度半透明降噪，弱化视觉干扰；
-- **自适应深浅色**：原生兼容系统浅色模式（Light Mode）与深色模式（Dark Mode）；
-- **全兼容**：同时优化卡片视图（Cards View）与经典表格视图（Table View）。
+本项目通过轻量、无外部依赖的 `userChrome.css` 样式规则，建立更符合直觉的视觉层级：
+- **未读邮件**：加粗高对比度显示（800 字重），确保第一眼即可准确定位；
+- **已读邮件**：采用柔和中灰色阶并降低透明度（0.65 不透明度），有效弱化背景干扰；
+- **深浅色自适应**：通过 `@media (prefers-color-scheme)` 原生支持浅色与深色（Dark Mode）模式；
+- **多视图兼容**：同时适配卡片视图（Cards View）与经典表格视图（Table View）。
 
 ---
 
-### 🚀 一键极速安装
+### 🚀 一键快速安装
 
-#### Windows 用户
-1. 下载或克隆本项目压缩包并解压。
+#### Windows 环境
+1. 下载或克隆本项目。
 2. 双击运行 **`scripts/install.bat`**。
-3. 按照提示重启 Thunderbird 即可！
-   *(脚本会自动探测你的配置目录，拷贝 CSS 并写入 `user.js` 启用样式支持)*
+3. 重启 Thunderbird 即可生效。  
+   *(脚本会自动检测 Profile 路径、拷贝样式文件并配置 `user.js` 开启样式扩展)*
 
-#### macOS / Linux 用户
-1. 打开终端克隆本项目：
+#### macOS / Linux 环境
+1. 克隆代码仓库：
    ```bash
    git clone https://github.com/santiago0071/thunderbird-better-unread.git
    cd thunderbird-better-unread
    ```
-2. 执行安装脚本：
+2. 运行安装脚本：
    ```bash
    chmod +x scripts/install.sh
    ./scripts/install.sh
    ```
-3. 重启 Thunderbird 即可享受清晰舒适的邮件列表！
+3. 重启 Thunderbird 即可完成部署。
 
 ---
 
-### 🛠️ 手动安装指南
+### 🛠️ 手动配置步骤
 
-如果你想手动把控配置：
+如需手动安装与核验：
 
-1. 打开 Thunderbird，点击右上角菜单 `≡` -> **设置 (Settings)** -> **常规 (General)**；
-2. 滑到最底部，点击 **配置编辑器... (Config Editor...)**；
-3. 搜索首选项：
+1. 打开 Thunderbird，进入右上角菜单 `≡` -> **设置 (Settings)** -> **常规 (General)**；
+2. 滑动至页面最底部，点击 **配置编辑器... (Config Editor...)**；
+3. 检索配置项：
    ```text
    toolkit.legacyUserProfileCustomizations.stylesheets
    ```
-   双击将其切换为 **`true`**；
+   双击确保其为 **`true`**；
 4. 点击顶部菜单 **帮助 (Help)** -> **故障排除信息 (Troubleshooting Information)**；
-5. 在“应用程序基本信息”表格中找到 **配置文件夹 (Profile Folder)**，点击其右侧的 **打开文件夹**；
-6. 在弹出的配置文件夹内，新建一个名为 `chrome` 的文件夹（注意全小写）；
-7. 将本项目中的 [`chrome/userChrome.css`](chrome/userChrome.css) 放入 `chrome` 文件夹中；
-8. 重启 Thunderbird 即可生效。
+5. 在“应用程序基本信息”列表中找到 **配置文件夹 (Profile Folder)**，点击其对应的 **打开文件夹**；
+6. 在该目录下新建名为 `chrome` 的文件夹（全部小写）；
+7. 将本项目中的 [`chrome/userChrome.css`](chrome/userChrome.css) 复制到 `chrome` 文件夹内；
+8. 重启 Thunderbird。
 
 ---
 
 ### ❓ 常见问题排查 (FAQ)
 
 <details>
-<summary><b>1. 重启后样式没有发生任何变化？</b></summary>
+<summary><b>1. 重启后样式未生效？</b></summary>
 
-- **检查首选项**：确保 `toolkit.legacyUserProfileCustomizations.stylesheets` 的值确实为 `true`。
-- **检查文件路径**：确认 `userChrome.css` 放置在正确的 Profile 目录下的 `chrome/` 子文件夹内。
-- **Windows 扩展名陷阱**：在 Windows 下如果开启了“隐藏已知文件扩展名”，新建文件很容易变成 `userChrome.css.txt`。请务必确认后缀名为 `.css`。
+- **核对首选项**：请确认 `toolkit.legacyUserProfileCustomizations.stylesheets` 是否已正确切换为 `true`。
+- **核对路径结构**：样式文件必须位于当前活动 Profile 目录下的 `chrome/userChrome.css`。
+- **文件后缀名检查**：Windows 默认隐藏扩展名环境下，新建文件可能被误存为 `userChrome.css.txt`，请确认后缀名严格为 `.css`。
 </details>
 
 <details>
-<summary><b>2. 如何卸载或恢复默认样式？</b></summary>
+<summary><b>2. 如何恢复默认外观？</b></summary>
 
-只需进入你的 Profile 文件夹，删除 `chrome/userChrome.css`（或删除整个 `chrome` 目录），然后重启 Thunderbird 即可立刻恢复官方默认外观。
+进入对应的 Profile 文件夹，删除 `chrome/userChrome.css` 文件（或整个 `chrome` 文件夹），重启 Thunderbird 即可恢复官方默认样式。
 </details>
 
 ---
 
 ## 📄 License
 
-本项目采用 [MIT License](LICENSE) 开源许可证。
-欢迎 Star ⭐️ 与 PR 贡献！
+本项目遵循 [MIT License](LICENSE) 开源许可协议。
+欢迎提交 Issue 与 Pull Request。
