@@ -135,21 +135,33 @@ If you prefer configuring files manually:
 
 ---
 
-### ❓ 常见问题排查 (FAQ)
+### ❓ Frequently Asked Questions (FAQ)
 
 <details>
-<summary><b>1. 重启后样式未生效？</b></summary>
+<summary><b>Q: How to make unread emails bold in Thunderbird Supernova? / 为什么重启后样式未生效？</b></summary>
 
-- **核对首选项**：请确认 `toolkit.legacyUserProfileCustomizations.stylesheets` 是否已正确切换为 `true`。
-- **核对路径结构**：样式文件必须位于当前活动 Profile 目录下的 `chrome/userChrome.css`。
-- **文件后缀名检查**：Windows 默认隐藏扩展名环境下，新建文件可能被误存为 `userChrome.css.txt`，请确认后缀名严格为 `.css`。
+- **Verify preference**: Ensure `toolkit.legacyUserProfileCustomizations.stylesheets` is toggled to `true` in `about:config` (Config Editor).
+- **Verify path**: Make sure `userChrome.css` is located strictly inside a `chrome` subfolder within your active profile directory (e.g. `<profile>/chrome/userChrome.css`).
+- **Check file extension (Windows)**: If Windows hides known extensions, you might accidentally create `userChrome.css.txt`. Ensure the extension is strictly `.css`.
 </details>
 
 <details>
-<summary><b>2. 如何恢复默认外观？</b></summary>
+<summary><b>Q: Does this work on Thunderbird 115, 128, and newer versions?</b></summary>
 
-进入对应的 Profile 文件夹，删除 `chrome/userChrome.css` 文件（或整个 `chrome` 文件夹），重启 Thunderbird 即可恢复官方默认样式。
+Yes. It targets generic DOM attributes (`[data-properties~="unread"]`) and tree elements (`#threadTree li` and `#threadTree tbody tr`), making it fully compatible with Thunderbird 115 (Supernova), 128 (ESR), and subsequent releases across Windows, macOS, and Linux.
 </details>
+
+<details>
+<summary><b>Q: How do I uninstall or restore default styles? / 如何恢复默认外观？</b></summary>
+
+Simply navigate to your profile directory, delete the `chrome/userChrome.css` file (or the entire `chrome` folder), and restart Thunderbird.
+</details>
+
+---
+
+## 🔍 Keywords & Topics
+
+`Thunderbird 115` • `Thunderbird 128` • `Supernova Cards View` • `userChrome.css Thunderbird` • `Unread email bold` • `Thunderbird read email dim gray` • `Dark Mode contrast` • `Thunderbird CSS theme` • `雷鸟客户端 卡片视图 未读邮件高亮` • `Thunderbird accessibility styling`
 
 ---
 
@@ -157,3 +169,4 @@ If you prefer configuring files manually:
 
 本项目遵循 [MIT License](LICENSE) 开源许可协议。
 欢迎提交 Issue 与 Pull Request。
+
