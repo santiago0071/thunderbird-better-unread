@@ -8,44 +8,58 @@
 /* --------------------------------------------------------------------------
    1. Light Mode (Default)
    -------------------------------------------------------------------------- */
-/* 1.1 先把所有已读邮件：全部变成浅灰普通细字、半透明 */
+/* 1.1 已读邮件：沉静石墨灰字、清晰易读但保持低调 */
 #threadTree tbody tr:not([data-properties~="unread"]),
 #threadTree li:not([data-properties~="unread"]) {
-  color: #888888 !important;
+  color: #555555 !important;
   font-weight: normal !important;
-  opacity: 0.65 !important;
+  opacity: 0.80 !important;
+  border-left: 3px solid transparent !important;
 }
 
-/* 1.2 专门指定未读邮件：纯黑、加粗、完全不透明 */
+/* 1.2 未读邮件：纯黑粗体、极光蓝微光渐进色背景与指示条 */
+#threadTree tbody tr[data-properties~="unread"],
+#threadTree li[data-properties~="unread"] {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.09) 0%, rgba(59, 130, 246, 0.03) 60%, transparent 100%) !important;
+  border-left: 3px solid #2563eb !important;
+  opacity: 1 !important;
+}
+
 #threadTree tbody tr[data-properties~="unread"],
 #threadTree li[data-properties~="unread"],
 #threadTree tbody tr[data-properties~="unread"] *,
 #threadTree li[data-properties~="unread"] * {
-  color: #000000 !important;
+  color: #0f172a !important;
   font-weight: 800 !important;
-  opacity: 1 !important;
 }
 
 /* --------------------------------------------------------------------------
    2. Dark Mode Support (深色模式适配)
    -------------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
-  /* 已读邮件：柔和灰字、降低透明度 */
+  /* 已读邮件：柔和灰阶、舒适通透 */
   #threadTree tbody tr:not([data-properties~="unread"]),
   #threadTree li:not([data-properties~="unread"]) {
-    color: #999999 !important;
+    color: #b0b0b0 !important;
     font-weight: normal !important;
-    opacity: 0.55 !important;
+    opacity: 0.75 !important;
+    border-left: 3px solid transparent !important;
   }
 
-  /* 未读邮件：高亮纯白、加粗、完全不透明 */
+  /* 未读邮件：高亮纯白、深海极光蓝微光渐进色与亮蓝指示条 */
+  #threadTree tbody tr[data-properties~="unread"],
+  #threadTree li[data-properties~="unread"] {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.20) 0%, rgba(37, 99, 235, 0.06) 60%, transparent 100%) !important;
+    border-left: 3px solid #60a5fa !important;
+    opacity: 1 !important;
+  }
+
   #threadTree tbody tr[data-properties~="unread"],
   #threadTree li[data-properties~="unread"],
   #threadTree tbody tr[data-properties~="unread"] *,
   #threadTree li[data-properties~="unread"] * {
     color: #ffffff !important;
     font-weight: 800 !important;
-    opacity: 1 !important;
   }
 }
 
