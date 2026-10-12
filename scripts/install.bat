@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 chcp 65001 >nul
 title Thunderbird Better Unread - Installer
 
@@ -39,7 +40,7 @@ for /d %%D in ("%TB_PROFILES_DIR%\*") do (
     
     REM Copy userChrome.css
     copy /y "%SOURCE_CSS%" "%%D\chrome\userChrome.css" >nul
-    if %errorlevel% equ 0 (
+    if exist "%%D\chrome\userChrome.css" (
         echo     ^--^> [SUCCESS] Copied userChrome.css to %%~nxD\chrome\
     ) else (
         echo     ^--^> [FAILED] Could not copy userChrome.css to %%~nxD\chrome\
@@ -47,12 +48,17 @@ for /d %%D in ("%TB_PROFILES_DIR%\*") do (
 
     REM Automatically enable toolkit.legacyUserProfileCustomizations.stylesheets in user.js
     set "USER_JS=%%D\user.js"
-    findstr /c:"toolkit.legacyUserProfileCustomizations.stylesheets" "%%D\user.js" >nul 2>&1
-    if %errorlevel% neq 0 (
-        echo user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true); >> "%%D\user.js"
-        echo     ^--^> [CONFIG] Enabled stylesheets pref in user.js
+    if not exist "!USER_JS!" (
+        echo user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true^); > "!USER_JS!"
+        echo     ^--^> [CONFIG] Created user.js and enabled stylesheets pref
     ) else (
-        echo     ^--^> [CONFIG] Stylesheets pref already enabled in user.js
+        findstr /c:"toolkit.legacyUserProfileCustomizations.stylesheets" "!USER_JS!" >nul 2>&1
+        if !errorlevel! neq 0 (
+            echo user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true^); >> "!USER_JS!"
+            echo     ^--^> [CONFIG] Enabled stylesheets pref in user.js
+        ) else (
+            echo     ^--^> [CONFIG] Stylesheets pref already enabled in user.js
+        )
     )
 )
 
@@ -66,12 +72,14 @@ echo.
 echo ======================================================================
 echo  [DONE] Installation completed successfully!
 echo.
-echo  Important Notice:
-echo  1. Restart Thunderbird if it is currently running.
-echo  2. If the custom styles do not take effect, verify in Thunderbird:
-echo     Settings -^> General -^> Config Editor (about:config)
-echo     Search: "toolkit.legacyUserProfileCustomizations.stylesheets"
-echo     Ensure it is set to "true".
+tasklist /fi "imagename eq thunderbird.exe" 2>nul | findstr /i /c:"thunderbird.exe" >nul
+if !errorlevel! equ 0 (
+    echo  [WARNING] Thunderbird is currently running!
+    echo  You MUST completely close and restart Thunderbird for changes to take effect.
+) else (
+    echo  Important Notice:
+    echo  Start Mozilla Thunderbird to enjoy the high-contrast unread cards.
+)
 echo ======================================================================
 echo.
 pause

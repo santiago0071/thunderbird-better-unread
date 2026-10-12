@@ -42,7 +42,7 @@ In **Mozilla Thunderbird 115+ (Supernova)**, the newly introduced **Cards View**
 
 #### Windows
 1. Download or clone this repository.
-2. Run **`scripts/install.bat`**.
+2. Run **`scripts/install.bat`** (or **`scripts/install.ps1`** in PowerShell).
 3. Restart Thunderbird.
 
 #### macOS / Linux
@@ -97,7 +97,7 @@ If you prefer configuring files manually:
 
 #### Windows 环境
 1. 下载或克隆本项目。
-2. 双击运行 **`scripts/install.bat`**。
+2. 双击运行 **`scripts/install.bat`**（或在 PowerShell 中执行 **`scripts/install.ps1`**）。
 3. 重启 Thunderbird 即可生效。  
    *(脚本会自动检测 Profile 路径、拷贝样式文件并配置 `user.js` 开启样式扩展)*
 
