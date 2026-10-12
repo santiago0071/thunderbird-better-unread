@@ -4,8 +4,8 @@
 [![Thunderbird: 115+ (Supernova)](https://img.shields.io/badge/Thunderbird-115%2B%20(Supernova)-orange.svg)](https://www.thunderbird.net/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)]()
 
-> **A lightweight CSS enhancement that improves visual contrast and hierarchy between read and unread messages in Mozilla Thunderbird Cards View.**  
-> 优化 Mozilla Thunderbird（Supernova 及更高版本）卡片视图中已读与未读邮件的视觉对比度与信息层级。
+> **A sleek, modern CSS enhancement for Mozilla Thunderbird Cards View — featuring aurora blue glowing gradients for unread emails and refined graphite-gray hierarchy for read messages.**  
+> 面向 Mozilla Thunderbird（Supernova 及更高版本）卡片视图的现代高级 CSS 增强补丁 —— 引入极光蓝微光渐进色未读卡片与沉静石墨灰已读排版。
 
 ---
 
@@ -19,8 +19,8 @@
 
 | 邮件状态 (State) | 默认样式 (Thunderbird Default) | 增强样式 (With Better Unread) |
 | :--- | :--- | :--- |
-| **已读邮件 (Read)** | 维持深色与常规字重，在密集列表中视觉权重大 | 采用柔和灰阶与细体，适度降低不透明度 (`opacity: 0.65`)，弱化视觉干扰 |
-| **未读邮件 (Unread)** | 与已读邮件的字重和对比度差异较小 | 强化为纯黑/纯白高对比度超粗体 (`font-weight: 800`)，快速聚焦未读信息 |
+| **已读邮件 (Read)** | 维持深色与常规字重，在密集列表中视觉权重大 | 采用沉静石墨灰 (`#555555` / 深色 `#b0b0b0`)，优化透明度至 `0.80`，清晰舒适、绝不喧宾夺主 |
+| **未读邮件 (Unread)** | 与已读邮件的字重和对比度差异较小 | 强化为超粗体 (`font-weight: 800`)，搭配**科技极光蓝微光渐进色背景**与 **3px 品牌指示条**，一眼聚焦 |
 
 ---
 
@@ -30,11 +30,13 @@
 ### 💡 Design Context
 In **Mozilla Thunderbird 115+ (Supernova)**, the newly introduced **Cards View** uses similar typography colors and font weights for both unread and read messages in the message list. In high-volume inboxes, quickly distinguishing unprocessed emails can require extra scanning effort.
 
-**Thunderbird Better Unread** provides a lightweight, zero-dependency stylesheet patch via `userChrome.css` to restore an intuitive visual hierarchy:
-- **Unread Messages**: Rendered with high-contrast text and prominent font weight (`font-weight: 800`).
-- **Read Messages**: Softened with neutral gray tones and gentle opacity (`opacity: 0.65`) to reduce visual clutter.
-- **Theme Adaptive**: Fully supports both Light Mode and Dark Mode via standard `@media (prefers-color-scheme)`.
-- **View Compatibility**: Applies seamlessly to both Cards View (`li`) and classic Table View (`tr`).
+**Thunderbird Better Unread** provides a lightweight, zero-dependency stylesheet patch via `userChrome.css` to deliver an elevated, modern visual hierarchy:
+- **Aurora Glow Unread Cards**: Rendered with high-contrast bold typography (`font-weight: 800`), a subtle Aurora Blue gradient glow (`linear-gradient`), and a crisp 3px accent indicator strip (`border-left`).
+- **Refined Read Messages**: Softened with premium graphite-gray tones (`#555555` / `#b0b0b0`) and optimized opacity (`0.80`) for effortless readability without stealing visual focus.
+- **Zero-Jitter Layout**: Built-in transparent border placeholders prevent awkward pixel shifts when status toggles between read and unread.
+- **Theme Adaptive**: Full native Light & Dark Mode support via standard `@media (prefers-color-scheme)`.
+- **View Compatibility**: Seamlessly adapts to both modern Cards View (`li`) and classic Table View (`tr`).
+- **Automated Installation**: Zero-friction setup on Windows (PowerShell & Batch), macOS, and Linux.
 
 ---
 
@@ -85,11 +87,13 @@ If you prefer configuring files manually:
 ### 💡 设计背景
 在 **Mozilla Thunderbird 115（Supernova 架构）**及后续版本中，卡片视图（Cards View）对已读邮件与未读邮件采用了接近的字体颜色和字重定义。当收件箱邮件较多时，用户需要花费额外精力来定位未处理的邮件。
 
-本项目通过轻量、无外部依赖的 `userChrome.css` 样式规则，建立更符合直觉的视觉层级：
-- **未读邮件**：加粗高对比度显示（800 字重），确保第一眼即可准确定位；
-- **已读邮件**：采用柔和中灰色阶并降低透明度（0.65 不透明度），有效弱化背景干扰；
-- **深浅色自适应**：通过 `@media (prefers-color-scheme)` 原生支持浅色与深色（Dark Mode）模式；
-- **多视图兼容**：同时适配卡片视图（Cards View）与经典表格视图（Table View）。
+本项目通过轻量、无外部依赖的 `userChrome.css` 样式规则，建立更符合直觉的现代视觉层级：
+- **极光蓝微光未读卡片**：纯黑/高亮纯白超粗体（800 字重），搭配通透清爽的科技极光蓝微光渐进色背景与 3px 品牌指示条，第一眼准确定位；
+- **质感石墨灰已读排版**：采用优雅石墨灰阶（浅色 `#555555` / 深色 `#b0b0b0`），适度优化不透明度（0.80），清晰易读、彻底弱化背景干扰；
+- **零跳动防抖结构**：内置防抖透明边框占位，邮件在已读/未读状态切换时平滑自然，列表不发生任何横向像素抖动；
+- **深浅色原生自适应**：通过 `@media (prefers-color-scheme)` 原生自适应浅色与深色（Dark Mode）模式；
+- **多视图无缝兼容**：同时适配卡片视图（Cards View）与经典表格视图（Table View）；
+- **一键自动化安装**：提供 Windows（PowerShell / Batch）、macOS 与 Linux 一键安全部署脚本。
 
 ---
 
